@@ -1,0 +1,51 @@
+//Вариант 6, Лаба 3
+
+#include "stdafx.h"
+#include "iostream"
+#include "Vector.h"
+#include "assert.h"
+
+void Print(double* mas, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << mas[i] << ' ';
+	}
+}
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	setlocale(LC_ALL, "Russian");
+#pragma region Инициализация 2 - х массивов для 2 - х объектов для последующего заполнения через конструктор копирования
+	int n = 5;
+	double* mas_src = new double[n];
+	for (int i = 0; i < n; i++)
+	{
+		mas_src[i] = rand() % 100;
+	}
+	double* mas_src2 = new double[n];
+	for (int i = 0; i < n; i++)
+	{
+		mas_src2[i] = rand() % 50;
+	}
+#pragma endregion
+	Vector mas1(mas_src,n);
+	Print(mas_src, n);
+	std::cout << '\n';
+	Vector mas2;
+	Print(mas_src2, n);
+	std::cout << "- massive for sum" << std::endl;
+	std::cout << "2nd element in massive 1 is:" <<std::endl;
+
+	std::cout <<  mas1[2] << std::endl;
+	mas2 = mas1;
+	assert(mas2 = mas1);
+	assert(mas2[1] == mas1[1]);
+	std::cout << "\nTEST(+):\n";
+	std::cout << '\n';
+	Print(mas1 + mas_src2,n); //второй операнд такой из-за варианта задания
+	system("pause");
+	return 0;
+}
+
