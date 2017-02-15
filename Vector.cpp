@@ -1,0 +1,77 @@
+#include "stdafx.h"
+#include "iostream"
+#include "Vector.h"
+
+Vector::Vector()
+{
+	this->size = 0;
+	this->mas = nullptr;
+}
+Vector::Vector(double* mas_src, int n)
+{
+	this->size = n;
+	this->mas = new double[n];
+	for (int i = 0; i < n; i++)
+	{
+		this->mas[i] = mas_src[i];
+	}
+}
+Vector::~Vector()
+{
+	delete[] this->mas;
+}
+double Vector::operator[](size_t position)
+{
+	if (position > this->size)
+	{
+		return 0;
+	}
+	else
+	{
+		return this->mas[position];
+	}
+}
+double *Vector:: operator=(const Vector& object)
+{
+	if (this->mas == nullptr)
+	{
+		mas = new double[object.size];
+	}
+	else
+	{
+		delete[] this->mas;
+	}
+	
+	this->size = object.size;
+	this->mas = new double[object.size];
+	for (int i = 0; i < object.size; i++)
+	{
+		this->mas[i] = object.mas[i];	
+	}
+	
+	return this->mas;
+}
+double * operator+(const Vector& a, double *b)
+{
+	if (a.mas == nullptr && b == nullptr)
+	{
+		
+		return 0;
+		
+	}
+	else if (a.mas == nullptr)
+	{
+		return b;
+	}
+	else if (b == nullptr)
+	{
+		return a.mas;
+	}
+	
+	for (int i = 0; i < a.size; i++)
+	{
+		a.mas[i] = a.mas[i] + b[i];
+	}
+	
+	return a.mas;
+}
