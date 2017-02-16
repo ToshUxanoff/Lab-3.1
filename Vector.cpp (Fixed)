@@ -33,11 +33,8 @@ double Vector::operator[](size_t position)
 }
 double *Vector:: operator=(const Vector& object)
 {
-	if (this->mas == nullptr)
-	{
-		mas = new double[object.size];
-	}
-	else
+	
+	if (this->mas != nullptr)
 	{
 		delete[] this->mas;
 	}
